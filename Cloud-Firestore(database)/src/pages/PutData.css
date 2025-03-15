@@ -1,0 +1,68 @@
+/* PutData.css */
+
+body {
+    background-color: black;
+    color: wheat;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .form-box {
+    background-color: rgba(255, 255, 255, 0.1); /* Slight transparency */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+    text-align: center;
+  }
+  
+  h1 {
+    color: wheat;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin: 10px 0 5px;
+    color: wheat;
+    font-weight: bold;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid wheat;
+    border-radius: 5px;
+    background-color: black;
+    color: wheat;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .input-field::placeholder {
+    color: rgba(245, 222, 179, 0.6); /* Light wheat */
+  }
+  
+  .submit-btn {
+    margin-top: 15px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: wheat;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .submit-btn:hover {
+    background-color: rgb(218, 165, 32); /* Golden wheat */
+  }
+  
