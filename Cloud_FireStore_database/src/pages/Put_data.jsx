@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, Firestore } from 'firebase/firestore';
 import { app } from '../firebase';
 import './PutData.css';
 
@@ -11,8 +11,8 @@ const PutData = () => {
 
   const writeData = async () => {
     try {
-      const db = getFirestore(app); // Ensure Firestore is correctly initialized
-      const result = await addDoc(collection(db, 'city'), { // Use `db`, not `firestore`
+      const firestore = getFirestore(app); // Ensure Firestore is correctly initialized
+      const result = await addDoc(collection(firestore, 'city'), { // Use `db`, not `firestore`
         name,
         pincode,
         lat,
@@ -24,6 +24,16 @@ const PutData = () => {
     }
   };
 
+  const makeSubCollection = async () => {
+    const firestore = getFirestore(app); 
+    const subdata = await addDoc(collection(firestore, 'city/pSFYOnMc4qq8xeIUoIxn/places'),{
+      name: 'Place 1',
+      lat: 12.34,
+      long: 56,
+      Date: new Date()
+    })
+    console.log(subdata);
+  }
   return (
     <div className="container">
       <div className="form-box">
@@ -72,6 +82,7 @@ const PutData = () => {
         <button onClick={writeData} className="submit-btn">
           Put Data
         </button>
+        <button onClick={makeSubCollection}>Put sub data</button>
       </div>
     </div>
   );
