@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 // import { getDatabase, ref, set } from 'firebase/database'
 import { app } from './firebase.js'
-import Register from './pages/register.jsx'
+import Register from './pages/Register/Register.jsx'
 import './App.css'
 import React from 'react'
-import Login from './pages/Login.jsx'
+import Login from './pages/Login/Login.jsx'
 
 // const db = getDatabase(app)
 const auth = getAuth(app);
@@ -46,9 +46,9 @@ const App = () => {
       <div className='App'>
         {/* Firebase App */}
         {/* <button onClick={putData}>Put data to firebase</button> */}
-        <Register />
         <Login />
         {/* <button onClick={signupUser}>Signup user</button> */}
+        <Register />
       </div>
     )
   }

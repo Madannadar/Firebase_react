@@ -1,7 +1,9 @@
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 // import { get } from 'firebase/database';
 import React, {useState} from 'react'
-import { app } from '../firebase';
+import { app } from '../../firebase';
+import './Register.css';
+
 
 const  auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
@@ -23,7 +25,7 @@ const Register = () => {
 
   return (
     <div className='signup-page'>
-        <h1>register</h1>
+        <h1>Register</h1>
       <label>Email</label>
       <input 
         onChange={e => setEmail(e.target.value)} 
