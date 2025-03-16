@@ -7,7 +7,7 @@ const PutData = () => {
   const [name, setName] = useState('');
   const [pincode, setPincode] = useState('');
   const [lat, setLat] = useState('');
-  const [long, setLong] = useState('');
+  const [long, setLong] = useState('' );
 
   const writeData = async () => {
     try {
@@ -61,6 +61,9 @@ const PutData = () => {
       pincode: 400017
     });
   }
+
+  // real time databse 
+  
   return (
     <div className="container">
       <div className="form-box">
