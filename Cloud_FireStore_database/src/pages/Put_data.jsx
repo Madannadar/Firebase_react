@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { getFirestore, collection, addDoc, Firestore } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, doc, getDoc, query, where, getDocs, updateDoc} from 'firebase/firestore';
 import { app } from '../firebase';
 import './PutData.css';
-
+const firestore = getFirestore(app);
 const PutData = () => {
   const [name, setName] = useState('');
   const [pincode, setPincode] = useState('');
@@ -11,7 +11,7 @@ const PutData = () => {
 
   const writeData = async () => {
     try {
-      const firestore = getFirestore(app); // Ensure Firestore is correctly initialized
+      // const firestore = getFirestore(app); // Ensure Firestore is correctly initialized
       const result = await addDoc(collection(firestore, 'city'), { // Use `db`, not `firestore`
         name,
         pincode,
@@ -25,7 +25,7 @@ const PutData = () => {
   };
 
   const makeSubCollection = async () => {
-    const firestore = getFirestore(app); 
+    // const firestore = getFirestore(app); 
     const subdata = await addDoc(collection(firestore, 'city/pSFYOnMc4qq8xeIUoIxn/places'),{
       name: 'Place 1',
       lat: 12.34,
@@ -33,6 +33,33 @@ const PutData = () => {
       Date: new Date()
     })
     console.log(subdata);
+  }
+
+  const getDocument = async () => {
+    // const firestore = getFirestore(app);
+    const ref = doc(firestore, 'city', 'pSFYOnMc4qq8xeIUoIxn');
+    const snap = await getDoc(ref); // Use `getDoc` instead of `get` and do not use doc it is a key word 
+    if(snap.exists){
+      console.log('Document data:', snap.data());
+    } else {
+      console.log('No such document!');
+    }
+  }
+
+  const getdocbyquery = async () => { 
+    const data = collection(firestore, 'city');
+    const q = query(data, where('name', '==', 'Mumbai'));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, ' => ', doc.data());
+    });
+  }
+  const updateDocument = async () => {
+    const cityRef = doc(firestore, 'city', 'pSFYOnMc4qq8xeIUoIxn');
+    await updateDoc(cityRef, {
+      name: 'Dharavi',
+      pincode: 400017
+    });
   }
   return (
     <div className="container">
@@ -83,6 +110,9 @@ const PutData = () => {
           Put Data
         </button>
         <button onClick={makeSubCollection}>Put sub data</button>
+        <button onClick={getDocument}>get data </button>
+        <button onClick={getdocbyquery}>get doc by query</button>
+        <button onClick={updateDocument}>updateDoc by query</button>
       </div>
     </div>
   );
